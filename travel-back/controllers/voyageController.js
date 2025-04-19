@@ -28,6 +28,7 @@ exports.createVoyage = async (req, res) => {
     try {
         const data = req.body;
         console.log("Request body:", req.body);
+        console.log(req.body.file);
 
         // If there's an uploaded file, add its path to the data
         if (req.file) {
@@ -37,6 +38,7 @@ exports.createVoyage = async (req, res) => {
         const voyage = await voyageModel.createVoyage(data);
         res.status(201).json(voyage);
     } catch (err) {
+        console.log("ERR",err.message);
         res.status(500).json({ error: err.message });
     }
 };
