@@ -1,0 +1,19 @@
+services:
+  postgres:
+    container_name: ta
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: Mx12?Ry#
+      POSTGRES_USER: postgres
+      POSTGRES_DB: travelAgency
+    ports:
+      - "5433:5432"
+    networks:
+      - localNet
+    restart: always  # This line ensures the container always restarts
+
+networks:
+  localNet:
+    name: localNet
+    driver: bridge
+

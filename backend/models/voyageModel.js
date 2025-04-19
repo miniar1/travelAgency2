@@ -7,11 +7,11 @@ const pool = require('../config/db');
 //};
 
 const createVoyage = async (data) => {
-  const { nomVoyage, description, prix, dateDepart, dateRetour, typeVoyage, image,promotion}=data;
+  const { nomVoyage, description, prix, dateDepart, dateRetour, typeVoyage, image, promotion } = data;
   const result = await pool.query(
-    `INSERT INTO voyage(nomVoyage, description, prix, typeVoyage, dateDepart, dateRetour, image, promotion, created_at, updated_at)
-     VALUES ($1, $2, $3, $4, $5, $6, $7, $8, NOW(), NOW()) RETURNING *`
-    [nomVoyage, description, prix, typeVoyage, dateDepart, dateRetour, image, promotion]
+      `INSERT INTO voyage(nomVoyage, description, prix, typeVoyage, dateDepart, dateRetour, image, promotion, created_at, updated_at)
+     VALUES ($1, $2, $3, $4, $5, $6, $7, $8, NOW(), NOW()) RETURNING *`,
+      [nomVoyage, description, prix, typeVoyage, dateDepart, dateRetour, image, promotion]
   );
   return result.rows[0];
 };

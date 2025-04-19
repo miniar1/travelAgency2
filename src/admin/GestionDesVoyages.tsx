@@ -49,36 +49,58 @@ const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
   }
 };
 
-const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-  e.preventDefault();
-  const form = new FormData();
-  form.append("nomVoyage", formData.nomVoyage);
-  form.append("description", formData.description);
-  form.append("prix", formData.prix);
-  form.append("dateDepart", formData.dateDepart);
-  form.append("dateReturn", formData.dateRetour);
-  form.append("typeVoyage", formData.typeVoyage);
-  form.append("promotion", formData.promotion);
-  if (image) {
-    form.append("image", image);
-  }
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
 
-  try {
-    await axios.post('http://localhost:5000/api/voyages', form, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-    });
-    alert("Voyage ajouté !");
-  } catch (error) {
-    console.error(error);
-    alert("Erreur lors de l'ajout");
-  }
-};
+    // OPTION 2: Manually create and append everything
+    const form = new FormData();
+    form.append("nomVoyage", formData.nomVoyage);
+    form.append("description", formData.description);
+    form.append("prix", formData.prix);
+    form.append("dateDepart", formData.dateDepart);
+    form.append("dateRetour", formData.dateRetour);  // Using the correct field name
+    form.append("typeVoyage", formData.typeVoyage);
+    form.append("promotion", formData.promotion);
+    if (image) {
+      form.append("image", image);
+    }
+
+    // Debug: check what's in the form data
+    console.log("Form data entries:");
+    for (let pair of form.entries()) {
+      console.log(pair[0], pair[1]);
+    }
+
+    try {
+      const response = await axios.post('http://localhost:5123/api/voyages/', form, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlcm5hbWUiOiJhZG1pbjAxIiwiaWF0IjoxNzQ1MDgxMTgwLCJleHAiOjE3NDUwODQ3ODB9.FrKgr5sFnLdszVsE15XXRyeE3q7QJB-VuscKOEV1xsk`, // Add Bearer token here
+        },
+      });
+      console.log("Response:", response.data);
+      alert("Voyage ajouté !");
+      // Reset the form
+      setFormData({
+        nomVoyage: '',
+        description: '',
+        prix: '',
+        image: '',
+        dateDepart: '',
+        dateRetour: '',
+        typeVoyage: '',
+        promotion: ''
+      });
+      setImage(null);
+    } catch (error) {
+      console.error("Error details:", error);
+      alert("Erreur lors de l'ajout");
+    }
+  };
 //  affichage des voyage
   const [voyages, setVoyages] = useState<Voyage[]>([]);
   useEffect(() => {
-    axios.get('http://localhost:5000/api/voyages')
+    axios.get('http://localhost:5123/api/voyages/')
       .then(res => setVoyages(res.data))
       .catch(err => console.error(err));
   }, []);

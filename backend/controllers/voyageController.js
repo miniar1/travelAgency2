@@ -12,6 +12,7 @@ exports.getVoyages = async (req, res) => {
 exports.createVoyage = async (req, res) => {
   try {
     const data = req.body;
+    console.log("CHECK REQ BODY", req.body, req.data , req.error);
     const voyage = await voyageModel.createVoyage(data);
     res.json(voyage);
   } catch (err) {
