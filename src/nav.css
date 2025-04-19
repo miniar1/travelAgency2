@@ -1,0 +1,49 @@
+.nav-item a {
+    font-family: Source serif 4 ;
+    transition: font-size 0.3s ease, color 0.3s ease;
+    text-decoration: none;
+    color: rgb(248, 244, 244);
+}
+
+.navbar {
+    display: flex;
+    justify-content: flex-end; /* Aligne les éléments à droite */
+    padding: 10px 20px;
+    background-color: transparent !important;
+    border: none; /* Supprime les bordures */
+    box-shadow: none; /* Supprime l'ombre */
+    position: absolute; /* Pour superposer la navbar sur l'image */
+    top: 0;
+    width: 100%;
+    z-index: 10;   
+
+}
+.li .left-links{
+  justify-content: start;
+}
+
+
+.mobile-menu-toggle {
+  background: none;
+  border: none;
+  color: inherit;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+     
+     .nav-list {
+  list-style: none;
+  display: flex;
+  gap: 15px;
+  margin: 0;
+  padding: 0;
+}
+  
+  .nav-item a:hover {
+    font-size: 1.2rem ;
+    font-weight: bold ;
+  }
+  @media (max-width:768px){
+  .custom-navbar {
+    justify-content: center;} /* Centrer les liens sur les petits écrans */
+}

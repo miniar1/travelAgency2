@@ -1,0 +1,38 @@
+.bestD {
+  text-align: center;
+  padding: 20px;
+}
+
+.carousel-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.carousel-slide img {
+  width: 100%;
+  height: 280px;
+  object-fit: cover;
+}
+
+.cart{
+  width:350px ;
+  height:350px;
+  background-color: antiquewhite;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.carousel-slide.a.h3{
+  text-decoration: none;
+  text-align: start;
+  margin-top: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+}
